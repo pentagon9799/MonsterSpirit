@@ -1,0 +1,303 @@
+/*
+ * Hilmi Abdurrahman Fakhrudin - 1807422008
+ */
+package hilmi;
+
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import septian.publicLineupPanel;
+
+/**
+ *
+ * @author hilmi
+ */
+public class Party_Data extends javax.swing.JPanel {
+
+    private String[] dataMonster;
+    private String[][] plpdataMonster=null;
+    private int monID, slot;
+    private ImageIcon icon;
+    private Battle_Campaign_PartySelect_Panel bcp;
+    //private SelectMonsterFrame smf;
+    private publicLineupPanel plp;
+    private Integer x=0;
+    private String userID;
+
+    /**
+     * Creates new form Party_Data
+     */
+    public Party_Data(Battle_Campaign_PartySelect_Panel bcp, int slot, String uid) {
+        initComponents();
+        userID = uid;
+        this.bcp = bcp;
+        this.slot = slot;
+        monsterIcon.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("monsterIcon/noIcon.png")));
+        monsterName.setText("Not Selected");
+        lvlLabel.setText("-");
+        atkLabel.setText("-");
+        defLabel.setText("-");
+        move1Label.setText("-");
+        move2Label.setText("-");
+        move3Label.setText("-");
+        x=0;
+    }
+    public Party_Data(publicLineupPanel plp, int slot,String uid) {
+        initComponents();
+        userID=uid;
+        this.plp = plp;
+        this.slot = slot;
+        monsterIcon.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("monsterIcon/noIcon.png")));
+        monsterName.setText("Not Selected");
+        lvlLabel.setText("-");
+        atkLabel.setText("-");
+        defLabel.setText("-");
+        move1Label.setText("-");
+        move2Label.setText("-");
+        move3Label.setText("-");
+        x=1;
+    }
+    
+    public boolean setParty(String[] data){
+        dataMonster = data;
+        //this.smf = new SelectMonsterFrame(this);
+        if(x==0)
+        {
+            if(!bcp.setPartyID(slot, dataMonster[0]))
+            {
+                return false;
+            }
+        }
+        if(x==1)
+        {
+            if(!plp.setPartyID(slot, dataMonster[0]))
+            {
+                return false;   
+            }
+            //System.out.println();
+            if(plpdataMonster != null)
+            {                
+                plp.set(plpdataMonster[slot][0], 0);
+            }
+            if(dataMonster != null)
+            {                
+                plp.set(dataMonster[0], 0);
+            }
+        }
+        monsterName.setText(dataMonster[2]);
+        lvlLabel.setText(dataMonster[8]);
+        int monsterLvl = Integer.parseInt(dataMonster[8]);
+        int baseAtk = Integer.parseInt(dataMonster[5]);
+        int baseDef = Integer.parseInt(dataMonster[6]);
+        int atk = baseAtk + (baseAtk * (monsterLvl/2));
+        int def = baseDef + (baseDef * (monsterLvl/2));
+        atkLabel.setText(Integer.toString(atk));
+        defLabel.setText(Integer.toString(def));
+        move1Label.setText(dataMonster[10]+" ("+dataMonster[13]+")");
+        move2Label.setText(dataMonster[15]+" ("+dataMonster[18]+")");
+        move3Label.setText(dataMonster[20]+" ("+dataMonster[23]+")");
+        monsterIcon.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("monsterIcon/"+dataMonster[3]+".png")));
+        return true;
+    }
+    public boolean setParty(String[][] data,int slot/*, publicLineupPanel plp*/){
+        plpdataMonster = data;
+        //this.plp=plp;
+        //this.smf = new SelectMonsterFrame(this);        
+        if(x==1)
+        {
+            if(!plp.setPartyID(slot, plpdataMonster[slot][0]))
+            {
+                return false;   
+            }
+            //this.smf = new SelectMonsterFrame(this);
+        }
+        monsterName.setText(plpdataMonster[slot][2]);
+        lvlLabel.setText(plpdataMonster[slot][8]);
+        int monsterLvl = Integer.parseInt(plpdataMonster[slot][8]);
+        int baseAtk = Integer.parseInt(plpdataMonster[slot][5]);
+        int baseDef = Integer.parseInt(plpdataMonster[slot][6]);
+        int atk = baseAtk + (baseAtk * (monsterLvl/2));
+        int def = baseDef + (baseDef * (monsterLvl/2));
+        atkLabel.setText(Integer.toString(atk));
+        defLabel.setText(Integer.toString(def));
+        move1Label.setText(plpdataMonster[slot][10]+" ("+plpdataMonster[slot][13]+")");
+        move2Label.setText(plpdataMonster[slot][15]+" ("+plpdataMonster[slot][18]+")");
+        move3Label.setText(plpdataMonster[slot][20]+" ("+plpdataMonster[slot][23]+")");
+        monsterIcon.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("monsterIcon/"+plpdataMonster[slot][3]+".png")));
+        return true;
+    }
+    
+    public String[] getDataMonster(){
+        return dataMonster;
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jSeparator1 = new javax.swing.JSeparator();
+        monsterIcon = new javax.swing.JLabel();
+        monsterName = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        defLabel = new javax.swing.JLabel();
+        lvlLabel = new javax.swing.JLabel();
+        atkLabel = new javax.swing.JLabel();
+        move1Label = new javax.swing.JLabel();
+        move2Label = new javax.swing.JLabel();
+        move3Label = new javax.swing.JLabel();
+        editMonsterBtn = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        partyClearBtn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setMaximumSize(new java.awt.Dimension(150, 340));
+        setMinimumSize(new java.awt.Dimension(150, 340));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 150, 10));
+
+        monsterIcon.setMaximumSize(new java.awt.Dimension(150, 150));
+        monsterIcon.setMinimumSize(new java.awt.Dimension(150, 150));
+        monsterIcon.setName(""); // NOI18N
+        monsterIcon.setPreferredSize(new java.awt.Dimension(150, 150));
+        monsterIcon.setVerifyInputWhenFocusTarget(false);
+        add(monsterIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 100, 100));
+
+        monsterName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        monsterName.setForeground(new java.awt.Color(255, 255, 255));
+        monsterName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        monsterName.setText("Jeanne D'arc Alter");
+        add(monsterName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 130, -1));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("DEF.");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("LV.");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("ATK.");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        defLabel.setForeground(new java.awt.Color(255, 255, 255));
+        defLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        defLabel.setText("0");
+        add(defLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 50, -1));
+
+        lvlLabel.setForeground(new java.awt.Color(255, 255, 255));
+        lvlLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lvlLabel.setText("0");
+        add(lvlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 50, -1));
+
+        atkLabel.setForeground(new java.awt.Color(255, 255, 255));
+        atkLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        atkLabel.setText("0");
+        add(atkLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 50, -1));
+
+        move1Label.setForeground(new java.awt.Color(255, 255, 255));
+        move1Label.setText("Moves1");
+        add(move1Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 130, -1));
+
+        move2Label.setForeground(new java.awt.Color(255, 255, 255));
+        move2Label.setText("Moves2");
+        add(move2Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 130, -1));
+
+        move3Label.setForeground(new java.awt.Color(255, 255, 255));
+        move3Label.setText("Moves3");
+        add(move3Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 130, -1));
+
+        editMonsterBtn.setText("Edit");
+        editMonsterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMonsterBtnActionPerformed(evt);
+            }
+        });
+        add(editMonsterBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 90, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 150, 10));
+
+        jSeparator3.setBackground(new java.awt.Color(240, 240, 240));
+        jSeparator3.setForeground(new java.awt.Color(240, 240, 240));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 335, 150, 10));
+
+        partyClearBtn.setText("X");
+        partyClearBtn.setFocusable(false);
+        partyClearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                partyClearBtnActionPerformed(evt);
+            }
+        });
+        add(partyClearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 40, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/2@300px.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, -6, 160, 350));
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void editMonsterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMonsterBtnActionPerformed
+        SelectMonsterFrame smf = new SelectMonsterFrame(this, userID);
+        smf.setVisible(true);
+    }//GEN-LAST:event_editMonsterBtnActionPerformed
+
+    private void partyClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partyClearBtnActionPerformed
+        monsterIcon.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("monsterIcon/noIcon.png")));
+        monsterName.setText("Not Selected");
+        lvlLabel.setText("-");
+        atkLabel.setText("-");
+        defLabel.setText("-");
+        move1Label.setText("-");
+        move2Label.setText("-");
+        move3Label.setText("-");
+        //dataMonster = null;
+        if(x==1){
+            if(plpdataMonster != null)
+            {
+                plp.set(plpdataMonster[slot][0], 0);
+                //plp.resetSlot(slot);
+            }
+            //System.out.println("ini data monster : "+dataMonster+"|inidatamonster index[0]: "+dataMonster[0]);
+            if(dataMonster != null)
+            {
+                plp.set(dataMonster[0], 0);
+                //plp.resetSlot(slot);
+            }
+            dataMonster = null;
+            plp.resetSlot(slot);
+            //System.out.println("masuk ngaaa ?");
+        }
+        if(x==0){
+            dataMonster = null;
+            bcp.resetSlot(slot);
+        }
+    }//GEN-LAST:event_partyClearBtnActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel atkLabel;
+    private javax.swing.JLabel defLabel;
+    private javax.swing.JButton editMonsterBtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lvlLabel;
+    private javax.swing.JLabel monsterIcon;
+    private javax.swing.JLabel monsterName;
+    private javax.swing.JLabel move1Label;
+    private javax.swing.JLabel move2Label;
+    private javax.swing.JLabel move3Label;
+    private javax.swing.JButton partyClearBtn;
+    // End of variables declaration//GEN-END:variables
+}
